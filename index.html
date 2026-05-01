@@ -4,478 +4,223 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SHELEN - Joki Tugas & Website</title>
-    <!-- Import Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Lilita+One&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Playfair+Display:wght@600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* === CORE VARIABLES === */
         :root {
-            --bg-dark-blue: #0f2c66;
-            --text-blue: #083b9c;
-            --purple-text: #372a7c;
+            --bg-navy: #0f2c66;
             --orange: #f58410;
             --white: #ffffff;
-            --paper-bg: #f5f6f8;
+            --glass: rgba(255, 255, 255, 0.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Quicksand', sans-serif;
-            background-color: var(--bg-dark-blue);
-            color: var(--white);
-            overflow-x: hidden;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Quicksand', sans-serif; }
+        body { background-color: var(--bg-navy); color: var(--white); overflow-x: hidden; }
 
-        /* === FLOATING NAVBAR === */
-        nav {
+        /* === LIVE SLOT BANNER === */
+        .live-banner {
+            background: var(--orange);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            padding: 10px 30px;
-            border-radius: 50px;
-            display: flex;
-            gap: 20px;
-            z-index: 1000;
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            top: 0; width: 100%; z-index: 2000;
+            animation: pulseBanner 2s infinite;
         }
-        nav a { color: #fff; text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        @keyframes pulseBanner { 0% { background: #f58410; } 50% { background: #ff3f34; } 100% { background: #f58410; } }
 
-        /* === 1. HERO SECTION (REPLIKA POSTER WE'RE OPEN) === */
+        /* === HERO SECTION === */
         #hero {
             background-color: var(--white);
-            color: var(--text-blue);
+            color: var(--bg-navy);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 20px;
-            overflow: hidden;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            position: relative; padding: 80px 20px 20px; text-align: center;
+            border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
         }
-        .hero-cursive {
-            font-family: 'Caveat', cursive;
-            font-size: 3.5rem;
-            color: var(--text-blue);
-            transform: rotate(-5deg);
-            margin-bottom: -15px;
-            z-index: 2;
-        }
-        .hero-big {
-            font-family: 'Anton', sans-serif;
-            font-size: 7rem;
-            line-height: 1;
-            color: var(--text-blue);
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-            text-align: center;
-        }
+        .hero-cursive { font-family: 'Caveat', cursive; font-size: 3.5rem; color: var(--bg-navy); transform: rotate(-5deg); margin-bottom: -15px; }
+        .hero-big { font-family: 'Anton', sans-serif; font-size: 6rem; line-height: 1; letter-spacing: 2px; }
         
-        /* Efek Teks Melayang (Fast & Cheap) */
-        .float-text {
-            font-family: 'Caveat', cursive;
-            font-size: 2.5rem;
-            color: #333;
-            position: absolute;
-            animation: floatAnim 3s ease-in-out infinite alternate;
-        }
-        .float-fast { top: 40%; left: 15%; transform: rotate(-15deg); }
-        .float-cheap { top: 40%; right: 15%; transform: rotate(15deg); }
-        @keyframes floatAnim {
-            0% { transform: translateY(0px) rotate(-10deg); }
-            100% { transform: translateY(-20px) rotate(-5deg); }
-        }
-
-        /* Logo Kotak Biru CSS murni */
-        .box-logo {
-            background-color: var(--text-blue);
-            width: 220px;
-            height: 220px;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        /* Gambar Monster & Logo Area */
+        .hero-image-container {
             position: relative;
-            box-shadow: 0 15px 35px rgba(8, 59, 156, 0.4);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
+            margin-top: 30px;
+            width: 250px; height: 250px;
+            display: flex; justify-content: center; align-items: flex-end;
+            animation: float 4s ease-in-out infinite;
         }
-        .box-logo:hover { transform: scale(1.05) translateY(-10px); }
-        
-        /* Monster ngintip pake Emoji/CSS */
-        .monster-peek {
-            position: absolute;
-            top: -45px;
-            font-size: 3.5rem;
-            z-index: -1;
-            transition: top 0.3s ease;
-        }
-        .box-logo:hover .monster-peek { top: -60px; }
+        /* PANGGIL GAMBAR DARI FOLDER ASSETS LU DI SINI */
+        .monster-img { position: absolute; top: -60px; width: 150px; z-index: 1; transition: top 0.3s; }
+        .hero-image-container:hover .monster-img { top: -80px; }
+        .box-logo { background: var(--bg-navy); width: 220px; height: 180px; border-radius: 20px; z-index: 2; display: flex; align-items: center; justify-content: center; color: white; font-family: 'Anton', sans-serif; font-size: 4rem; text-align: center; line-height: 0.9; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
 
-        .box-text {
-            font-family: 'Lilita One', cursive;
-            color: white;
-            font-size: 5rem;
-            line-height: 0.85;
-            text-shadow: 2px 4px 0px rgba(0,0,0,0.2);
-            text-align: center;
-        }
-        .sub-logo {
-            font-family: 'Lilita One', cursive;
-            font-size: 1.2rem;
-            color: #000;
-            margin-top: 15px;
-            letter-spacing: 1px;
-        }
-        .time-badge {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-blue);
-            margin-top: 40px;
-        }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
 
-        /* === 2. PRICE LIST SECTION === */
-        #pricelist {
-            padding: 100px 20px;
-            background: linear-gradient(135deg, #0f2c66 0%, #153a82 100%);
-            position: relative;
-        }
-        .price-header {
-            text-align: right;
-            max-width: 1000px;
-            margin: 0 auto 50px;
-        }
-        .price-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
-            font-weight: 700;
-            line-height: 1.1;
-            color: #f0f4ff;
-        }
+        .time-badge { font-family: 'Anton', sans-serif; font-size: 2rem; color: var(--orange); margin-top: 20px; }
 
-        .price-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+        /* === KALKULATOR HARGA (INTERAKTIF) === */
+        #calculator { padding: 80px 20px; max-width: 600px; margin: 0 auto; text-align: center; }
+        .calc-title { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px; color: var(--orange); }
+        .calc-box {
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.2);
+            padding: 30px; border-radius: 20px; backdrop-filter: blur(10px);
+            text-align: left;
         }
-        .category-box {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 700; margin-bottom: 8px; color: #d1e0ff; }
+        select, input {
+            width: 100%; padding: 15px; border-radius: 10px; border: none;
+            background: rgba(255,255,255,0.9); font-size: 1rem; font-weight: 700; color: var(--bg-navy);
+            outline: none;
         }
-        .category-box:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        .total-price {
+            font-family: 'Anton', sans-serif; font-size: 2.5rem; color: #ffe066;
+            text-align: center; margin: 20px 0; border-top: 2px dashed rgba(255,255,255,0.2); padding-top: 20px;
         }
-        .category-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #fff;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding-bottom: 10px;
+        .btn-order-calc {
+            display: block; width: 100%; background: #25D366; color: white; text-align: center;
+            padding: 15px; border-radius: 10px; font-weight: 700; font-size: 1.2rem; text-decoration: none;
+            transition: transform 0.3s;
         }
-        .item-list { list-style: none; }
-        .item-list li {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.05rem;
-            margin-bottom: 12px;
-            border-bottom: 1px dashed rgba(255,255,255,0.15);
-            padding-bottom: 5px;
-        }
-        .item-list li span:last-child { font-weight: 700; color: #ffe066; }
+        .btn-order-calc:hover { transform: scale(1.05); }
 
-        /* === 3. CARA ORDER SECTION (KERTAS REALISTIS) === */
-        #order-guide {
-            padding: 100px 20px;
-            background-color: var(--bg-dark-blue);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .paper-note {
-            background: var(--paper-bg);
-            width: 100%;
-            max-width: 600px;
-            padding: 60px 40px 40px;
-            border-radius: 5px 30px 5px 40px;
-            box-shadow: 20px 20px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.02);
-            position: relative;
-            transform: rotate(-1deg);
-            color: var(--purple-text);
-            text-align: center;
-        }
-        /* Jarum Pentul CSS */
-        .pushpin {
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 25px;
-            height: 25px;
-            background: radial-gradient(circle at 30% 30%, #4facfe, #005be1);
-            border-radius: 50%;
-            box-shadow: 2px 5px 10px rgba(0,0,0,0.4);
-            z-index: 10;
-        }
-        .pushpin::after {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 10px;
-            width: 4px;
-            height: 20px;
-            background: #999;
-            box-shadow: 10px -5px 5px rgba(0,0,0,0.2);
-            transform: rotate(20deg);
-            z-index: -1;
-        }
+        /* === FAQ ACCORDION === */
+        #faq { padding: 50px 20px 100px; max-width: 800px; margin: 0 auto; }
+        .faq-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px; }
+        .faq-item { background: var(--glass); margin-bottom: 15px; border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); }
+        .faq-question { padding: 20px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s ease; color: #ccc; }
+        .faq-item.active .faq-answer { padding: 0 20px 20px; max-height: 200px; }
+        .faq-item.active .faq-question { color: var(--orange); }
 
-        .paper-title {
-            font-family: 'Anton', sans-serif;
-            font-size: 4.5rem;
-            letter-spacing: 2px;
-            margin-bottom: -5px;
-            color: var(--purple-text);
+        /* === FOOTER SIGNATURE ELEGAN === */
+        footer {
+            text-align: center; padding: 30px; background: #081a3f;
+            font-family: 'Playfair Display', serif; font-style: italic; color: rgba(255,255,255,0.5);
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
-        .paper-subtitle {
-            font-family: 'Caveat', cursive;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-        }
+        .signature { font-family: 'Caveat', cursive; font-size: 2rem; color: var(--white); display: block; margin-top: 10px; letter-spacing: 2px;}
 
-        .steps-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .step-box {
-            border: 2px solid var(--purple-text);
-            border-radius: 15px;
-            padding: 20px;
-            background: #fff;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-        .step-box:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(55, 42, 124, 0.1); }
-        .step-box h3 {
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 700;
-            font-size: 1.3rem;
-            border-bottom: 2px solid var(--purple-text);
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-        }
-        .step-box p { font-size: 0.95rem; font-weight: 600; }
-
-        .terms-text {
-            color: #d63031;
-            font-weight: 700;
-            font-size: 1rem;
-            margin-top: 20px;
-        }
-
-        /* === INTERACTIVE BUTTONS === */
-        .btn-interactive {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
-            z-index: 1000;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-        .btn-interactive:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 35px rgba(37, 211, 102, 0.7); }
-
-        /* Responsive Fixes */
-        @media (max-width: 768px) {
-            .hero-big { font-size: 4.5rem; }
-            .hero-cursive { font-size: 2.5rem; }
-            .float-text { font-size: 1.8rem; }
-            .price-header h2 { font-size: 3rem; text-align: center; }
-            .steps-grid { grid-template-columns: 1fr; }
-            .paper-note { padding: 50px 20px 30px; }
-            .paper-title { font-size: 3.5rem; }
-            .btn-interactive span { display: none; /* Sembunyikan teks di HP, sisa icon */ }
-            .btn-interactive { padding: 15px; border-radius: 50%; }
-        }
+        @media (max-width: 768px) { .hero-big { font-size: 4rem; } }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGASI KACA -->
-    <nav>
-        <a href="#hero">Open</a>
-        <a href="#pricelist">Price</a>
-        <a href="#order-guide">Order</a>
-    </nav>
+    <div class="live-banner">🔥 SLOT JOKI MINGGU INI: SISA 2 SLOT LAGI! 🔥</div>
 
-    <!-- SECTION 1: HERO (POSTER PUTIH) -->
     <section id="hero">
-        <div class="float-text float-fast">fast</div>
-        <div class="float-text float-cheap">cheap</div>
-        
         <div class="hero-cursive">Yes, come in</div>
         <div class="hero-big">WE'RE OPEN</div>
 
-        <!-- REPLIKA LOGO KOTAK BIRU -->
-        <div class="box-logo" id="logo3d">
-            <div class="monster-peek">👹</div>
-            <div class="box-text">SHE<br>LEN</div>
+        <div class="hero-image-container">
+            <!-- GANTI NAMA FILE INI SESUAI YANG LU UPLOAD DI FOLDER ASSETS -->
+            <img src="assets/monster-oren.png" alt="Monster" class="monster-img" onerror="this.style.display='none'">
+            <div class="box-logo">SHE<br>LEN</div>
         </div>
-        
-        <div class="sub-logo">JOKI TUGAS & BIKIN WEBSITE</div>
+
         <div class="time-badge">24/7</div>
+        <p style="margin-top: 10px; font-weight: 700; letter-spacing: 1px;">JOKI TUGAS & BIKIN WEBSITE</p>
     </section>
 
-    <!-- SECTION 2: PRICE LIST (BACKGROUND BIRU GELAP TULISAN SERIF) -->
-    <section id="pricelist">
-        <div class="price-header">
-            <h2>Our<br>Price List</h2>
-        </div>
-
-        <div class="price-container">
-            <!-- Jasa Ketik -->
-            <div class="category-box scroll-reveal">
-                <h3 class="category-title">Jasa Ketik</h3>
-                <ul class="item-list">
-                    <li><span>Makalah (Sekolah)</span> <span>20-35k</span></li>
-                    <li><span>Makalah (Kuliah)</span> <span>30-50k</span></li>
-                    <li><span>Ms.Word (Materi Sudah Ada)</span> <span>2k/hal</span></li>
-                    <li><span>Ms.Word (Materi Belum Ada)</span> <span>3k/hal</span></li>
-                    <li><span>Essay (Sekolah)</span> <span>15-25k</span></li>
-                    <li><span>Essay (Kuliah)</span> <span>20-30k</span></li>
-                    <li><span>Tambahan Hal.</span> <span>3-5k</span></li>
-                </ul>
+    <!-- KALKULATOR HARGA -->
+    <section id="calculator">
+        <h2 class="calc-title">Estimasi Harga</h2>
+        <div class="calc-box">
+            <div class="form-group">
+                <label>Pilih Layanan:</label>
+                <select id="layanan">
+                    <option value="0">-- Pilih Jenis Tugas --</option>
+                    <option value="35000">Makalah Sekolah (Per Tugas)</option>
+                    <option value="50000">Makalah Kuliah (Per Tugas)</option>
+                    <option value="2000">Ketik Ms.Word / Hal (Materi Ada)</option>
+                    <option value="3000">Ketik Ms.Word / Hal (Materi Belum Ada)</option>
+                    <option value="4000">PowerPoint / Slide (Materi Belum Ada)</option>
+                    <option value="15000">Desain Poster / Banner</option>
+                    <option value="100000">Website Native / Fullstack (Mulai dari)</option>
+                </select>
             </div>
-
-            <!-- Konten -->
-            <div class="category-box scroll-reveal" style="transition-delay: 0.1s;">
-                <h3 class="category-title">Konten</h3>
-                <ul class="item-list">
-                    <li><span>Powerpoint (Materi Ada)</span> <span>2k/Slide</span></li>
-                    <li><span>Powerpoint (Belum Ada)</span> <span>4k/Slide</span></li>
-                    <li><span>Poster</span> <span>10-20k</span></li>
-                    <li><span>Banner</span> <span>10-20k</span></li>
-                    <li><span>Carousel</span> <span>10k/Slide</span></li>
-                </ul>
-            </div>
-
-            <!-- Edit & Alternatif -->
-            <div class="category-box scroll-reveal" style="transition-delay: 0.2s;">
-                <h3 class="category-title">Edit Dokumen</h3>
-                <ul class="item-list">
-                    <li><span>Daftar Isi / Lampiran</span> <span>5k</span></li>
-                    <li><span>Daftar Pustaka</span> <span>3k</span></li>
-                    <li><span>Penomoran Halaman</span> <span>2k/5 hal</span></li>
-                </ul>
-                <h3 class="category-title" style="margin-top: 30px;">Jasa Alternatif</h3>
-                <ul class="item-list">
-                    <li><span>Paper/Artikel</span> <span>50k+</span></li>
-                    <li><span>Laporan Proposal</span> <span>100k+</span></li>
-                    <li><span>Website Native</span> <span>70k+</span></li>
-                    <li><span>Website Fullstack</span> <span>100k+</span></li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 3: CARA ORDER (KERTAS DITEMPEL PENTUL) -->
-    <section id="order-guide">
-        <div class="paper-note scroll-reveal">
-            <div class="pushpin"></div>
             
-            <h2 class="paper-title">CARA ORDER</h2>
-            <div class="paper-subtitle">Order Dengan Cukup 2 Langkah Di Bawah Ini</div>
-            
-            <div class="steps-grid">
-                <div class="step-box">
-                    <h3>PERTAMA</h3>
-                    <p>KLIK LINK TOMBOL DI BAWAH ATAU DM IG INI UNTUK MENGIRIM PESAN KEPADA ADMIN</p>
-                </div>
-                <div class="step-box">
-                    <h3>TERAKHIR</h3>
-                    <p>MENGISI FORMAT ORDER DAN TAMBAHAN KETENTUAN JIKA ADA, LALU AKAN KAMI PROSES</p>
-                </div>
+            <div class="form-group">
+                <label>Jumlah (Halaman/Slide/Tugas):</label>
+                <input type="number" id="jumlah" value="1" min="1">
             </div>
 
-            <div class="terms-text">
-                ‼️ WAJIB DP 40% & DILUNASKAN SAAT TUGAS SELESAI <br>
-                ✍️ Free Revisi 3x
-            </div>
+            <div class="total-price" id="hasil-harga">Rp 0</div>
+
+            <a href="#" class="btn-order-calc" id="btn-pesan">Kirim Order via WA</a>
         </div>
     </section>
 
-    <!-- TOMBOL WA MENGAMBANG INTERAKTIF -->
-    <a href="https://wa.me/62895338203376?text=Halo%20Admin%20Shelen,%20aku%20mau%20order%20joki%20tugas!" class="btn-interactive" target="_blank" id="waButton">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.487-1.761-1.66-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.015c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.81 11.81 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.41z"/></svg>
-        <span>Chat Admin</span>
-    </a>
+    <!-- FAQ SECTION -->
+    <section id="faq">
+        <h2 class="faq-title">Pertanyaan Umum</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">Berapa lama proses pengerjaannya? <span>+</span></div>
+            <div class="faq-answer">Tergantung tingkat kesulitan tugas. Makalah & Essay standar bisa selesai dalam 1-2 hari (24-48 Jam). Untuk Website memakan waktu 3-7 hari.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Apakah ada garansi atau revisi? <span>+</span></div>
+            <div class="faq-answer">Tentu! Kami memberikan fasilitas Free Revisi maksimal 3x selama tidak melenceng dari brief/format order awal.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Bagaimana sistem pembayarannya? <span>+</span></div>
+            <div class="faq-answer">Wajib melakukan DP sebesar 40% di awal sebagai tanda jadi. Sisa pembayaran dilunasi setelah tugas selesai dan bukti hasil (watermark) kami kirimkan.</div>
+        </div>
+    </section>
 
-    <!-- GODMODE JAVASCRIPT ANIMATIONS -->
+    <footer>
+        Precision Over Noise.
+        <span class="signature">Engineered by Nizar</span>
+    </footer>
+
+    <!-- SCRIPT LOGIKA GODMODE -->
     <script>
-        // 1. Animasi Logo Mengikuti Kursor (Efek Parallax 3D)
-        const logo = document.getElementById('logo3d');
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.pageX) / 30;
-            const y = (window.innerHeight / 2 - e.pageY) / 30;
-            logo.style.transform = `perspective(500px) rotateY(${x}deg) rotateX(${y}deg) scale(1.02)`;
-        });
+        // 1. Kalkulator Dinamis
+        const layanan = document.getElementById('layanan');
+        const jumlah = document.getElementById('jumlah');
+        const hasilHarga = document.getElementById('hasil-harga');
+        const btnPesan = document.getElementById('btn-pesan');
+        const nomorWA = "62895338203376";
 
-        // 2. Animasi Muncul Halus Saat Di-Scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0) scale(1)';
+        function updateHarga() {
+            let hargaSatuan = parseInt(layanan.value);
+            let qty = parseInt(jumlah.value);
+            
+            if(hargaSatuan > 0 && qty > 0) {
+                let total = hargaSatuan * qty;
+                // Format Rupiah
+                hasilHarga.innerHTML = "Rp " + total.toLocaleString('id-ID');
+                
+                // Update Link WA
+                let namaLayanan = layanan.options[layanan.selectedIndex].text;
+                let pesan = `Halo Admin Shelen, saya mau order layanan *${namaLayanan}* sebanyak *${qty}*.\nEstimasi total di web: *Rp ${total.toLocaleString('id-ID')}*.\nMohon info selanjutnya ya!`;
+                btnPesan.href = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+            } else {
+                hasilHarga.innerHTML = "Rp 0";
+                btnPesan.href = "#";
+            }
+        }
+
+        layanan.addEventListener('change', updateHarga);
+        jumlah.addEventListener('input', updateHarga);
+
+        // 2. Accordion FAQ
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                // Tutup semua dulu
+                faqItems.forEach(el => el.classList.remove('active'));
+                faqItems.forEach(el => el.querySelector('span').innerText = '+');
+                // Buka yang diklik
+                if (!isActive) {
+                    item.classList.add('active');
+                    item.querySelector('span').innerText = '-';
                 }
             });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.scroll-reveal').forEach((el) => {
-            el.style.opacity = 0;
-            el.style.transform = 'translateY(40px) scale(0.95)';
-            el.style.transition = 'all 0.8s cubic-bezier(0.5, 0, 0, 1)';
-            observer.observe(el);
-        });
-
-        // 3. Animasi Jarum Pentul Goyang saat halaman di-load
-        const paper = document.querySelector('.paper-note');
-        paper.addEventListener('mouseenter', () => {
-            paper.style.transform = 'rotate(0deg) scale(1.02)';
-            paper.style.boxShadow = '25px 25px 50px rgba(0,0,0,0.6)';
-        });
-        paper.addEventListener('mouseleave', () => {
-            paper.style.transform = 'rotate(-1deg) scale(1)';
-            paper.style.boxShadow = '20px 20px 40px rgba(0,0,0,0.5)';
         });
     </script>
 </body>
