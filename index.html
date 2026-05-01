@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHELEN - Joki Tugas & Bikin Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* === COLOR PALETTE & VARIABLES === */
+        :root {
+            --primary-blue: #0f3470;
+            --secondary-blue: #1c4b9e;
+            --accent-orange: #f28202;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-light: #f4f7f6;
+            --card-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        /* === GLOBAL STYLE === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* === NAVBAR === */
+        nav {
+            background-color: rgba(15, 52, 112, 0.95);
+            padding: 15px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-orange);
+        }
+
+        /* === HERO SECTION === */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px 50px;
+            background: radial-gradient(circle at center, var(--secondary-blue) 0%, var(--primary-blue) 100%);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #d1e0ff;
+        }
+
+        .badges {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .badge {
+            background-color: var(--accent-orange);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transform: rotate(-3deg);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .badge:nth-child(2) { transform: rotate(2deg); }
+        .badge:nth-child(3) { transform: rotate(-1deg); }
+
+        .btn-order {
+            background-color: #25D366; /* WhatsApp Green */
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-order:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* === PRICING SECTION === */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--accent-orange);
+        }
+
+        #services {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 2px dashed rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+
+        .price-list {
+            list-style: none;
+        }
+
+        .price-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+        }
+
+        .price-list li span:last-child {
+            font-weight: bold;
+            color: #ffe066;
+        }
+
+        /* === HOW TO ORDER === */
+        #order-guide {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step-box {
+            background: white;
+            border: 2px solid var(--primary-blue);
+            border-radius: 15px;
+            padding: 25px;
+            flex: 1;
+            min-width: 250px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .step-box h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .terms {
+            margin-top: 40px;
+            background: #ffeaa7;
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-weight: bold;
+            color: #d63031;
+            box-shadow: 4px 4px 0px #fdcb6e;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background-color: #08214a;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* === RESPONSIVE UTILS === */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            nav ul { display: none; /* Simplifikasi navbar di HP */ }
+            .btn-order { width: 100%; justify-content: center; }
+        }
+
+        /* Floating WA Button */
+        .float-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        .float-wa:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">👾 SHELEN</div>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#services">Price List</a></li>
+            <li><a href="#order-guide">Cara Order</a></li>
+        </ul>
+    </nav>
+
+    <header id="hero">
+        <h1 class="hero-title">SHELEN</h1>
+        <p class="hero-subtitle">Joki Tugas & Bikin Website</p>
+        
+        <div class="badges">
+            <div class="badge">Yes, WE'RE OPEN</div>
+            <div class="badge">⚡ Fast</div>
+            <div class="badge">💸 Cheap</div>
+            <div class="badge">🕒 24/7</div>
+        </div>
+
+        <a href="https://wa.me/62895338203376?text=Halo%20Admin%20Shelen,%20aku%20mau%20order%20joki%20tugas!" class="btn-order" target="_blank">
+            💬 Chat Admin Sekarang
+        </a>
+    </header>
+
+    <section id="services">
+        <h2 class="section-title">Our Price List 📝</h2>
+        <div class="pricing-grid">
+            
+            <div class="pricing-card">
+                <div class="card-icon">⌨️</div>
+                <h3>Jasa Ketik</h3>
+                <ul class="price-list">
+                    <li><span>Makalah (Sekolah)</span> <span>20-35k</span></li>
+                    <li><span>Makalah (Kuliah)</span> <span>30-50k</span></li>
+                    <li><span>Ms.Word (Materi Ada)</span> <span>2k/hal</span></li>
+                    <li><span>Ms.Word (Materi Belum Ada)</span> <span>3k/hal</span></li>
+                    <li><span>Essay (Sekolah)</span> <span>15-25k</span></li>
+                    <li><span>Essay (Kuliah)</span> <span>20-30k</span></li>
+                    <li><span>Tambahan Hal.</span> <span>3-5k</span></li>
+                </ul>
+            </div>
+
+            <div class="pricing-card">
+                <div class="card-icon">🎨</div>
+                <h3>Konten</h3>
+                <ul class="price-list">
+                    <li><span>Powerpoint (Materi Ada)</span> <span>2k/Slide</span></li>
+                    <li><span>Powerpoint (Belum Ada)</span> <span>4k/Slide</span></li>
+                    <li><span>Poster</span> <span>10-20k</span></li>
+                    <li><span>Banner</span> <span>10-20k</span></li>
+                    <li><span>Carousel</span> <span>10k/Slide</span></li>
+                </ul>
+            </div>
+
+            <div class="pricing-card">
+                <div class="card-icon">📂</div>
+                <h3>Edit Dokumen</h3>
+                <ul class="price-list">
+                    <li><span>Daftar Isi</span> <span>5k</span></li>
+                    <li><span>Daftar Gambar/Lampiran</span> <span>5k</span></li>
+                    <li><span>Daftar Pustaka</span> <span>3k</span></li>
+                    <li><span>Penomoran Halaman</span> <span>2k/5 hal</span></li>
+                </ul>
+            </div>
+
+            <div class="pricing-card">
+                <div class="card-icon">💻</div>
+                <h3>Jasa Alternatif</h3>
+                <ul class="price-list">
+                    <li><span>Paper/Artikel</span> <span>50k+</span></li>
+                    <li><span>Laporan Proposal</span> <span>100k+</span></li>
+                    <li><span>Website Native</span> <span>70k+</span></li>
+                    <li><span>Website Fullstack</span> <span>100k+</span></li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="order-guide">
+        <h2 class="section-title" style="color: var(--primary-blue);">📌 Cara Order</h2>
+        <p style="margin-bottom: 30px; font-weight: bold;">Order Dengan Cukup 2 Langkah Di Bawah Ini:</p>
+        
+        <div class="steps-container">
+            <div class="step-box">
+                <h3>1. PERTAMA</h3>
+                <p>Klik tombol Chat Admin di website ini atau DM IG untuk mengirim pesan order.</p>
+            </div>
+            <div class="step-box">
+                <h3>2. TERAKHIR</h3>
+                <p>Mengisi format order dan tambahan ketentuan jika ada, lalu akan kami proses.</p>
+            </div>
+        </div>
+
+        <div class="terms">
+            ‼️ WAJIB DP 40% & DILUNASKAN SAAT TUGAS SELESAI <br>
+            ✍️ Free Revisi 3x
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 SHELEN Joki Tugas & Web. All rights reserved.</p>
+        <p style="margin-top: 5px; color: #a0b2d1;">Precision Over Noise.</p>
+    </footer>
+
+    <a href="https://wa.me/62895338203376?text=Halo%20Admin%20Shelen,%20aku%20mau%20order%20joki%20tugas!" class="float-wa" target="_blank">
+        💬
+    </a>
+
+    <script>
+        // Animasi muncul perlahan saat di-scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.pricing-card, .step-box').forEach((el) => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
